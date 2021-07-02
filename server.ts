@@ -1,23 +1,42 @@
+import "reflect-metadata";
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 
-const app = express();
-const PORT = 8000;
+import { ApolloServer } from "apollo-server-express";
+import { buildSchema } from "type-graphql";
 
-app.use(cors());
+import { UserResolver } from "./graphql/resolvers/UserResolver";
 
-mongoose
-  .connect("mongodb://localhost:27017/washly", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("DB connection successful"))
-  .catch((err: any) => console.error("DB connection failed" + err));
+async function main() {
+  const schema = await buildSchema({
+    resolvers: [UserResolver],
+    emitSchemaFile: true,
+  });
+  const PORT = 8000;
+  const app = express();
 
-// rest of the code remains same
+  const server = new ApolloServer({
+    schema,
+  });
 
-app.get("/", (req, res) => res.send("Express + TypeScript Server"));
-app.listen(PORT, () => {
-  console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
-});
+  server.applyMiddleware({ app });
+
+  app.use(cors());
+
+  mongoose
+    .connect("mongodb://localhost:27017/washly", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() => console.log("DB connection successful"))
+    .catch((err: any) => console.error("DB connection failed" + err));
+
+  // rest of the code remains same
+
+  app.get("/", (req, res) => res.send("Express + TypeScript Server"));
+  app.listen(PORT, () => {
+    console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
+  });
+}
+main();
