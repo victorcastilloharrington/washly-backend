@@ -12,9 +12,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "apollo-server-express": "^2.25.2",
+    "class-validator": "^0.13.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongoose": "^5.13.0"
+    "graphql": "^15.5.1",
+    "mongoose": "^5.13.0",
+    "reflect-metadata": "^0.1.13",
+    "type-graphql": "^1.1.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.10",
