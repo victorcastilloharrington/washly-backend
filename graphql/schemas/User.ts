@@ -3,7 +3,7 @@ import { Field, ObjectType, InputType, ID } from "type-graphql";
 @ObjectType()
 export class User {
   @Field((type) => ID)
-  _id: string;
+  _id?: string;
 
   @Field()
   name: string;
