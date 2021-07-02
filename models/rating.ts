@@ -4,23 +4,18 @@ interface Rating {
   locationId: Types.ObjectId;
   userId: Types.ObjectId;
   value: number;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-const schema = new Schema<Rating>({
-  userId: { type: Types.ObjectId, required: true },
-  locationId: { type: Types.ObjectId, required: true },
-  value: { type: Number, required: true },
-  createdAt: {
-    type: Date,
-    default: Date.now(),
+const schema = new Schema<Rating>(
+  {
+    userId: { type: Types.ObjectId, required: true },
+    locationId: { type: Types.ObjectId, required: true },
+    value: { type: Number, required: true },
   },
-  updatedAt: {
-    type: Date,
-    default: Date.now(),
-  },
-});
+  { timestamps: true }
+);
 
 const RatingModel = model<Rating>("Rating", schema);
 

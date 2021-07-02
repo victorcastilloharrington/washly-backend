@@ -3,22 +3,17 @@ import { Schema, model, Types } from "mongoose";
 interface Favorite {
   userId: Types.ObjectId;
   locationId: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-const schema = new Schema<Favorite>({
-  userId: { type: Types.ObjectId, required: true },
-  locationId: { type: String, required: true },
-  createdAt: {
-    type: Date,
-    default: Date.now(),
+const schema = new Schema<Favorite>(
+  {
+    userId: { type: Types.ObjectId, required: true },
+    locationId: { type: String, required: true },
   },
-  updatedAt: {
-    type: Date,
-    default: Date.now(),
-  },
-});
+  { timestamps: true }
+);
 
 const FavoriteModel = model<Favorite>("Favorite", schema);
 

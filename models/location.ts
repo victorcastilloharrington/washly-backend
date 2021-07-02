@@ -23,42 +23,37 @@ interface Location {
   country: string;
   schedule: Schedule;
   pickup: Pickup;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-const schema = new Schema<Location>({
-  userId: Types.ObjectId,
-  name: { type: String, required: true },
-  address: String,
-  telephone: String,
-  latitude: { type: Number, required: true },
-  longitude: { type: Number, required: true },
-  city: { type: String, required: true },
-  country: { type: String, required: true },
-  schedule: [
-    {
-      day: { type: Number, required: true },
-      startTime: { type: Number, required: true },
-      endTime: { type: Number, required: true },
-    },
-  ],
-  pickup: [
-    {
-      time: Number,
-      price: Number,
-      radius: Number,
-    },
-  ],
-  createdAt: {
-    type: Date,
-    default: Date.now(),
+const schema = new Schema<Location>(
+  {
+    userId: Types.ObjectId,
+    name: { type: String, required: true },
+    address: String,
+    telephone: String,
+    latitude: { type: Number, required: true },
+    longitude: { type: Number, required: true },
+    city: { type: String, required: true },
+    country: { type: String, required: true },
+    schedule: [
+      {
+        day: { type: Number, required: true },
+        startTime: { type: Number, required: true },
+        endTime: { type: Number, required: true },
+      },
+    ],
+    pickup: [
+      {
+        time: Number,
+        price: Number,
+        radius: Number,
+      },
+    ],
   },
-  updatedAt: {
-    type: Date,
-    default: Date.now(),
-  },
-});
+  { timestamps: true }
+);
 
 const locationModel = model<Location>("Location", schema);
 

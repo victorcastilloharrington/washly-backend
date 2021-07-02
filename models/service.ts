@@ -5,24 +5,19 @@ interface Service {
   price: number;
   name: string;
   description: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-const schema = new Schema<Service>({
-  locationId: { type: Types.ObjectId, required: true },
-  price: { type: Number, required: true },
-  name: { type: String, required: true },
-  description: { type: String, required: true },
-  createdAt: {
-    type: Date,
-    default: Date.now(),
+const schema = new Schema<Service>(
+  {
+    locationId: { type: Types.ObjectId, required: true },
+    price: { type: Number, required: true },
+    name: { type: String, required: true },
+    description: { type: String, required: true },
   },
-  updatedAt: {
-    type: Date,
-    default: Date.now(),
-  },
-});
+  { timestamps: true }
+);
 
 const ServiceModel = model<Service>("Service", schema);
 
