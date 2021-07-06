@@ -3,6 +3,27 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+type Booking {
+  _id: ID!
+  createdAt: DateTime!
+  dateCompleted: DateTime!
+  locationId: ID!
+  price: Float!
+  services: [ID!]!
+  status: String!
+  updatedAt: DateTime!
+  userId: ID!
+}
+
+input BookingInput {
+  dateCompleted: DateTime
+  locationId: ID!
+  price: Float!
+  services: [ID!]!
+  status: String
+  userId: ID!
+}
+
 """
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
@@ -17,8 +38,6 @@ type Location {
   latitude: Float!
   longitude: Float!
   name: String!
-  pickup: [Pickup!]!
-  schedule: [Schedule!]!
   status: String!
   telephone: String!
   updatedAt: DateTime!
@@ -38,13 +57,15 @@ input LocationInput {
 }
 
 type Mutation {
-  addLocation(locationInput: LocationInput!): Location!
-  addPickup(pickupInput: PickupInput!): Location!
-  addSchedule(scheduleInput: ScheduleInput!): Location!
-  addUser(userInput: UserInput!): User!
+  addBooking(data: BookingInput!): Booking!
+  addLocation(data: LocationInput!): Location!
+  addPickup(data: PickupInput!): Pickup!
+  addSchedule(data: ScheduleInput!): Schedule!
+  addUser(data: UserInput!): User!
 }
 
 type Pickup {
+  _id: ID!
   price: Float!
   radius: Float!
   time: Float!
@@ -58,13 +79,20 @@ input PickupInput {
 }
 
 type Query {
-  location(id: String!): Location!
-  locations: [Location!]
-  user(id: String!): User!
-  users: [User!]
+  getAllBooking: [Booking!]
+  getAllLocation: [Location!]
+  getAllPickup: [Pickup!]
+  getAllSchedule: [Schedule!]
+  getAllUser: [User!]
+  getBooking(id: String!): Booking
+  getLocation(id: String!): Location
+  getPickup(id: String!): Pickup
+  getSchedule(id: String!): Schedule
+  getUser(id: String!): User
 }
 
 type Schedule {
+  _id: ID!
   day: Int!
   endTime: Float!
   startTime: Float!

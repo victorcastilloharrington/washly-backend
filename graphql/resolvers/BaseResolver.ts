@@ -16,7 +16,7 @@ function createBaseResolver<T extends ClassType>(
       return await model.find({}).lean();
     }
 
-    @Query((type) => [objectTypeCls], { name: `get${suffix}`, nullable: true })
+    @Query((type) => objectTypeCls, { name: `get${suffix}`, nullable: true })
     async get(@Arg("id") id: string): Promise<T> {
       return await model.findById(id).lean();
     }

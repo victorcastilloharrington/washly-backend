@@ -9,10 +9,18 @@ import { buildSchema } from "type-graphql";
 import { UserResolver } from "./graphql/resolvers/UserResolver";
 import { LocationResolver } from "./graphql/resolvers/LocationResolver";
 import { BookingResolver } from "./graphql/resolvers/BookingResolver";
+import { PickupResolver } from "./graphql/resolvers/PickupResolver";
+import { ScheduleResolver } from "./graphql/resolvers/ScheduleResolver";
 
 async function main() {
   const schema = await buildSchema({
-    resolvers: [UserResolver, LocationResolver, BookingResolver],
+    resolvers: [
+      UserResolver,
+      LocationResolver,
+      BookingResolver,
+      PickupResolver,
+      ScheduleResolver,
+    ],
     emitSchemaFile: true,
   });
   const PORT = 8000;
