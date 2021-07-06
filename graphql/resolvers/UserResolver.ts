@@ -5,7 +5,7 @@ import UserModel from "../../models/user";
 @Resolver((of) => User)
 export class UserResolver {
   @Query((returns) => [User], { nullable: true })
-  async getUsers(): Promise<User[]> {
+  async users(): Promise<User[]> {
     return await UserModel.find({});
   }
 

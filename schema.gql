@@ -8,12 +8,63 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 """
 scalar DateTime
 
+type Location {
+  _id: ID!
+  address: String!
+  city: String!
+  country: String!
+  createdAt: DateTime!
+  latitude: Float!
+  longitude: Float!
+  name: String!
+  pickup: [Pickup!]!
+  schedule: [Schedule!]!
+  status: String!
+  telephone: String!
+  updatedAt: DateTime!
+  userId: ID!
+}
+
+input LocationInput {
+  address: String!
+  city: String!
+  country: String!
+  latitude: Float!
+  longitude: Float!
+  name: String!
+  status: String
+  telephone: String
+  userId: ID!
+}
+
 type Mutation {
+  addLocation(locationInput: LocationInput!): Location!
+  addSchedule(scheduleInput: ScheduleInput!): Location!
   addUser(userInput: UserInput!): User!
 }
 
+type Pickup {
+  price: Float!
+  radius: Float!
+  time: Float!
+}
+
 type Query {
-  getUsers: [User!]
+  locations: [Location!]
+  users: [User!]
+}
+
+type Schedule {
+  day: Int!
+  endTime: Float!
+  startTime: Float!
+}
+
+input ScheduleInput {
+  day: Int!
+  endTime: Float!
+  locationId: ID!
+  startTime: Float!
 }
 
 type User {

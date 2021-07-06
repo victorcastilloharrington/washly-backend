@@ -1,7 +1,7 @@
 import { Schema, model, Types } from "mongoose";
 
 interface Schedule {
-  day: [number];
+  day: number;
   startTime: number;
   endTime: number;
 }
@@ -15,14 +15,15 @@ interface Pickup {
 interface Location {
   userId: Types.ObjectId;
   name: string;
+  status?: string;
   address?: string;
   telephone?: string;
   latitude: number;
   longitude: number;
   city: string;
   country: string;
-  schedule: Schedule;
-  pickup: Pickup;
+  schedule: Schedule[];
+  pickup: Pickup[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -31,6 +32,7 @@ const schema = new Schema<Location>(
   {
     userId: Types.ObjectId,
     name: { type: String, required: true },
+    status: { type: String, default: "inactive" },
     address: String,
     telephone: String,
     latitude: { type: Number, required: true },

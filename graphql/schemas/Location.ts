@@ -1,13 +1,32 @@
-import { Field, ObjectType, InputType, ID } from "type-graphql";
-interface Schedule {
-  day: [number];
+import {
+  Field,
+  ObjectType,
+  InterfaceType,
+  InputType,
+  ID,
+  Int,
+} from "type-graphql";
+import { Types } from "mongoose";
+import { User } from "./User";
+
+@ObjectType()
+export class Schedule {
+  @Field((type) => Int)
+  day: number;
+
+  @Field()
   startTime: number;
+
+  @Field()
   endTime: number;
 }
-
-interface Pickup {
+@ObjectType()
+export class Pickup {
+  @Field()
   time: number;
+  @Field()
   price: number;
+  @Field()
   radius: number;
 }
 
@@ -20,7 +39,10 @@ export class Location {
   name: string;
 
   @Field()
-  address: string;
+  status?: string;
+
+  @Field()
+  address?: string;
 
   @Field()
   telephone?: string;
@@ -37,11 +59,14 @@ export class Location {
   @Field()
   country: string;
 
-  @Field()
-  schedule: Schedule[];
+  @Field((type) => [Schedule])
+  schedule?: Schedule[];
 
-  @Field()
-  pickup: Pickup[];
+  @Field((type) => [Pickup])
+  pickup?: Pickup[];
+
+  @Field((type) => ID)
+  userId: Types.ObjectId;
 
   @Field()
   createdAt?: Date;
@@ -55,10 +80,13 @@ export class LocationInput implements Partial<Location> {
   @Field()
   name: string;
 
+  @Field({ nullable: true })
+  status?: string;
+
   @Field()
   address: string;
 
-  @Field()
+  @Field({ nullable: true })
   telephone?: string;
 
   @Field()
@@ -72,4 +100,22 @@ export class LocationInput implements Partial<Location> {
 
   @Field()
   country: string;
+
+  @Field((type) => ID)
+  userId: Types.ObjectId;
+}
+
+@InputType()
+export class ScheduleInput implements Partial<Schedule> {
+  @Field((type) => Int)
+  day: number;
+
+  @Field()
+  startTime: number;
+
+  @Field()
+  endTime: number;
+
+  @Field((type) => ID)
+  locationId: Types.ObjectId;
 }

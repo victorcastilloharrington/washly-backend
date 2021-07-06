@@ -7,10 +7,11 @@ import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 
 import { UserResolver } from "./graphql/resolvers/UserResolver";
+import { LocationResolver } from "./graphql/resolvers/LocationResolver";
 
 async function main() {
   const schema = await buildSchema({
-    resolvers: [UserResolver],
+    resolvers: [UserResolver, LocationResolver],
     emitSchemaFile: true,
   });
   const PORT = 8000;
