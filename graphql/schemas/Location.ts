@@ -1,25 +1,5 @@
 import { Field, ObjectType, InputType, ID, Int } from "type-graphql";
 import { Types } from "mongoose";
-@ObjectType()
-export class Schedule {
-  @Field((type) => Int)
-  day: number;
-
-  @Field()
-  startTime: number;
-
-  @Field()
-  endTime: number;
-}
-@ObjectType()
-export class Pickup {
-  @Field()
-  time: number;
-  @Field()
-  price: number;
-  @Field()
-  radius: number;
-}
 
 @ObjectType()
 export class Location {
@@ -49,12 +29,6 @@ export class Location {
 
   @Field()
   country: string;
-
-  @Field((type) => [Schedule])
-  schedule?: Schedule[];
-
-  @Field((type) => [Pickup])
-  pickup?: Pickup[];
 
   @Field((type) => ID)
   userId: Types.ObjectId;
@@ -94,33 +68,4 @@ export class LocationInput implements Partial<Location> {
 
   @Field((type) => ID)
   userId: Types.ObjectId;
-}
-
-@InputType()
-export class ScheduleInput implements Partial<Schedule> {
-  @Field((type) => Int)
-  day: number;
-
-  @Field()
-  startTime: number;
-
-  @Field()
-  endTime: number;
-
-  @Field((type) => ID)
-  locationId: Types.ObjectId;
-}
-@InputType()
-export class PickupInput implements Partial<Pickup> {
-  @Field()
-  time: number;
-
-  @Field()
-  price: number;
-
-  @Field()
-  radius: number;
-
-  @Field((type) => ID)
-  locationId: Types.ObjectId;
 }
