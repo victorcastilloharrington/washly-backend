@@ -1,11 +1,4 @@
-import {
-  Field,
-  ObjectType,
-  InterfaceType,
-  InputType,
-  ID,
-  Int,
-} from "type-graphql";
+import { Field, ObjectType, InputType, ID, Int } from "type-graphql";
 import { Types } from "mongoose";
 @ObjectType()
 export class Schedule {
