@@ -29,6 +29,19 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 """
 scalar DateTime
 
+type Favorite {
+  _id: ID!
+  createdAt: DateTime!
+  locationId: ID!
+  updatedAt: DateTime!
+  userId: ID!
+}
+
+input FavoriteInput {
+  locationId: ID!
+  userId: ID!
+}
+
 type Location {
   _id: ID!
   address: String!
@@ -58,6 +71,7 @@ input LocationInput {
 
 type Mutation {
   addBooking(data: BookingInput!): Booking!
+  addFavorite(data: FavoriteInput!): Favorite!
   addLocation(data: LocationInput!): Location!
   addPickup(data: PickupInput!): Pickup!
   addSchedule(data: ScheduleInput!): Schedule!
@@ -80,11 +94,13 @@ input PickupInput {
 
 type Query {
   getAllBooking: [Booking!]
+  getAllFavorite: [Favorite!]
   getAllLocation: [Location!]
   getAllPickup: [Pickup!]
   getAllSchedule: [Schedule!]
   getAllUser: [User!]
   getBooking(id: String!): Booking
+  getFavorite(id: String!): Favorite
   getLocation(id: String!): Location
   getPickup(id: String!): Pickup
   getSchedule(id: String!): Schedule

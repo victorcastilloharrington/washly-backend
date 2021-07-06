@@ -11,6 +11,7 @@ import { LocationResolver } from "./graphql/resolvers/LocationResolver";
 import { BookingResolver } from "./graphql/resolvers/BookingResolver";
 import { PickupResolver } from "./graphql/resolvers/PickupResolver";
 import { ScheduleResolver } from "./graphql/resolvers/ScheduleResolver";
+import { FavoriteResolver } from "./graphql/resolvers/FavoriteResolver";
 
 async function main() {
   const schema = await buildSchema({
@@ -20,6 +21,7 @@ async function main() {
       BookingResolver,
       PickupResolver,
       ScheduleResolver,
+      FavoriteResolver,
     ],
     emitSchemaFile: true,
   });
