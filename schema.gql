@@ -75,6 +75,7 @@ type Mutation {
   addLocation(data: LocationInput!): Location!
   addPickup(data: PickupInput!): Pickup!
   addSchedule(data: ScheduleInput!): Schedule!
+  addService(data: ServiceInput!): Service!
   addUser(data: UserInput!): User!
 }
 
@@ -98,12 +99,14 @@ type Query {
   getAllLocation: [Location!]
   getAllPickup: [Pickup!]
   getAllSchedule: [Schedule!]
+  getAllService: [Service!]
   getAllUser: [User!]
   getBooking(id: String!): Booking
   getFavorite(id: String!): Favorite
   getLocation(id: String!): Location
   getPickup(id: String!): Pickup
   getSchedule(id: String!): Schedule
+  getService(id: String!): Service
   getUser(id: String!): User
 }
 
@@ -119,6 +122,23 @@ input ScheduleInput {
   endTime: Float!
   locationId: ID!
   startTime: Float!
+}
+
+type Service {
+  _id: ID!
+  createdAt: DateTime!
+  description: String!
+  locationId: ID!
+  name: String!
+  price: Float!
+  updatedAt: DateTime!
+}
+
+input ServiceInput {
+  description: String!
+  locationId: ID!
+  name: String!
+  price: Float!
 }
 
 type User {
