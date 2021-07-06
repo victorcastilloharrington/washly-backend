@@ -2,8 +2,8 @@ import { Query, Resolver, Mutation, Arg } from "type-graphql";
 import {
   Location,
   LocationInput,
-  Schedule,
   ScheduleInput,
+  PickupInput,
 } from "../schemas/Location";
 import LocationModel from "../../models/location";
 
@@ -11,7 +11,12 @@ import LocationModel from "../../models/location";
 export class LocationResolver {
   @Query((returns) => [Location], { nullable: true })
   async locations(): Promise<Location[]> {
-    return await LocationModel.find({});
+    return await LocationModel.find({}).lean();
+  }
+
+  @Query((returns) => Location)
+  async location(@Arg("id") id: string): Promise<Location> {
+    return await LocationModel.findById(id).lean();
   }
 
   @Mutation((returns) => Location)
@@ -56,6 +61,21 @@ export class LocationResolver {
       locationId,
       {
         $push: { schedule: { day, startTime, endTime } },
+      },
+      { new: true }
+    );
+
+    return location;
+  }
+
+  @Mutation((returns) => Location)
+  async addPickup(
+    @Arg("pickupInput") { time, price, radius, locationId }: PickupInput
+  ): Promise<Location | null> {
+    const location = await LocationModel.findOneAndUpdate(
+      locationId,
+      {
+        $push: { pickup: { time, price, radius } },
       },
       { new: true }
     );

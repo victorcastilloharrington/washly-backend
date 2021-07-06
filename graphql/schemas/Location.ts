@@ -7,8 +7,6 @@ import {
   Int,
 } from "type-graphql";
 import { Types } from "mongoose";
-import { User } from "./User";
-
 @ObjectType()
 export class Schedule {
   @Field((type) => Int)
@@ -115,6 +113,20 @@ export class ScheduleInput implements Partial<Schedule> {
 
   @Field()
   endTime: number;
+
+  @Field((type) => ID)
+  locationId: Types.ObjectId;
+}
+@InputType()
+export class PickupInput implements Partial<Pickup> {
+  @Field()
+  time: number;
+
+  @Field()
+  price: number;
+
+  @Field()
+  radius: number;
 
   @Field((type) => ID)
   locationId: Types.ObjectId;
