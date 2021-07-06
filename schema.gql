@@ -74,6 +74,7 @@ type Mutation {
   addFavorite(data: FavoriteInput!): Favorite!
   addLocation(data: LocationInput!): Location!
   addPickup(data: PickupInput!): Pickup!
+  addRating(data: RatingInput!): Rating!
   addSchedule(data: ScheduleInput!): Schedule!
   addService(data: ServiceInput!): Service!
   addUser(data: UserInput!): User!
@@ -98,6 +99,7 @@ type Query {
   getAllFavorite: [Favorite!]
   getAllLocation: [Location!]
   getAllPickup: [Pickup!]
+  getAllRating: [Rating!]
   getAllSchedule: [Schedule!]
   getAllService: [Service!]
   getAllUser: [User!]
@@ -105,9 +107,25 @@ type Query {
   getFavorite(id: String!): Favorite
   getLocation(id: String!): Location
   getPickup(id: String!): Pickup
+  getRating(id: String!): Rating
   getSchedule(id: String!): Schedule
   getService(id: String!): Service
   getUser(id: String!): User
+}
+
+type Rating {
+  _id: ID!
+  createdAt: DateTime!
+  locationId: ID!
+  updatedAt: DateTime!
+  userId: ID!
+  value: Float!
+}
+
+input RatingInput {
+  locationId: ID!
+  userId: ID!
+  value: Float!
 }
 
 type Schedule {

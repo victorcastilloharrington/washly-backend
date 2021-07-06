@@ -13,6 +13,7 @@ import { PickupResolver } from "./graphql/resolvers/PickupResolver";
 import { ScheduleResolver } from "./graphql/resolvers/ScheduleResolver";
 import { FavoriteResolver } from "./graphql/resolvers/FavoriteResolver";
 import { ServiceResolver } from "./graphql/resolvers/ServiceResolver";
+import { RatingResolver } from "./graphql/resolvers/RatingResolver";
 
 async function main() {
   const schema = await buildSchema({
@@ -24,6 +25,7 @@ async function main() {
       ScheduleResolver,
       FavoriteResolver,
       ServiceResolver,
+      RatingResolver,
     ],
     emitSchemaFile: true,
   });
