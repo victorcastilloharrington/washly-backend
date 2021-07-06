@@ -39,6 +39,7 @@ input LocationInput {
 
 type Mutation {
   addLocation(locationInput: LocationInput!): Location!
+  addPickup(pickupInput: PickupInput!): Location!
   addSchedule(scheduleInput: ScheduleInput!): Location!
   addUser(userInput: UserInput!): User!
 }
@@ -49,8 +50,17 @@ type Pickup {
   time: Float!
 }
 
+input PickupInput {
+  locationId: ID!
+  price: Float!
+  radius: Float!
+  time: Float!
+}
+
 type Query {
+  location(id: String!): Location!
   locations: [Location!]
+  user(id: String!): User!
   users: [User!]
 }
 
@@ -71,6 +81,7 @@ type User {
   _id: ID!
   createdAt: DateTime!
   email: String!
+  locations: [Location!]!
   name: String!
   password: String!
   type: String!

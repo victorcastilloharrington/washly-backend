@@ -1,5 +1,12 @@
 import { Field, ObjectType, InputType, ID } from "type-graphql";
-
+interface IUser {
+  name: string;
+  email: string;
+  password: string;
+  type: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
 @ObjectType()
 export class User {
   @Field((type) => ID)
